@@ -1,0 +1,105 @@
+\documentclass{article}
+
+% --- load packages ---
+
+\usepackage[margin=1in]{geometry} % change the margins
+\usepackage{amsmath} % useful math environments and commands like align
+\usepackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=blue]{hyperref} % hyperlinks between references
+\usepackage{graphicx}  % include images
+\usepackage[caption=false]{subfig} % subfigures.  false option prevents conflicts in caption styling with other packages
+\usepackage{booktabs} % better tables
+\usepackage[capitalise]{cleveref} % better referencing. uses cref.
+\usepackage[section]{placeins} % sometimes useful to prevent figures from floating out of a section
+\usepackage{cite} % handles multiple citations in one command better
+\usepackage{doi} % allow correct hypderlinking of DOIs
+
+
+
+\begin{document}
+
+\title{Put Title Here}
+\author{Put names here}
+% put in \date{} if you don't want a date to appear, or enter a specific date, otherwise default is today's date.
+\maketitle
+
+\section{Section Title}
+\subsection{Subsection Title}
+
+Our project deals with public transportation. We decided to attempt to optimize a bus route in the form of a path between two points. We first had to change our discrete grid model into a continuous model. We accomplished this by modeling a few city blocks as a two-dimensional sine wave, shown in \cref{eq:sine} and \cref{fig:model}. In \cref{fig:model}, each valley is essentially a street; there is very little resistance to moving along a street. Each hill is a city block, somewhere a car cannot go. However, since this is a continuous model, we needed to include blocks in the model. Therefore it is simply very time consuming to drive through a city block. This encourages the optimizer to choose points along the roads.
+
+\begin{equation}
+    time = |sin(5x) cos(5y)| + .5
+    \label{eq:sine}
+\end{equation}
+
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=5in]{model}
+\caption{The time to travel through each point in a city}
+\label{fig:model}
+\end{figure}
+
+The objective function for our prototype calculated the total travel time between points based on our city model. The input design variables were 31 x and y positions on the grid. The objective function interpolated x and y values between each point and its adjacent point. It then summed up the total time to travel between the two points by calculating the value of the city model (\cref{eq:sine}) at each interpolated point. The total time returned by the objective function is each of those interpolated times added together. While this method is complex, it is the only way we could find to somewhat accurately model traveling through a city grid.
+
+We added several constraints to our problem. The constraints prevented each point from going backwards, essentially forcing the path to constantly approach the end goal. This makes sense, since a car would not turn around 360 degrees randomly in the middle of a road. The constraints were measured by calculating the difference between each adjacent point and forcing them to be positive.
+
+\subsection{Subsection title}
+We were able to successfully solve our problem using fmincon. We used an initial starting point of an equally spaced, diagonal line between the points (0,0) and (3,3), shown in \cref{fig:start}.
+
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=3.5in]{start}
+\caption{Starting points laid over city grid}
+\label{fig:start}
+\end{figure}
+
+The final solution is shown in the same grid in \cref{fig:solutionfmin}. \Cref{fig:solutionfmin} shows clearly that the optimal solution lies along the roads in the model. This makes sense, as driving through a building would take additional time, even in our model. Additionally, this solution fits the assigned constraints; the path does not backtrack at any point. It is interesting to note that there are many minimums possible in this model. The roads are all the same length and have the same time to travel. However, this specific path was chosen by the optimizer, likely due to our initial inputs.
+ 
+\begin{figure}[htpb]
+\centering
+\includegraphics[width=3.5in]{solutionfmin}
+\caption{Final points laid over city grid}
+\label{fig:solutionfmin}
+\end{figure}
+
+While we were able to get a solution, fmincon struggled with our problem. It took almost 40,000 function calls to get to this solution. The convergence measure firstorderopt remained well over one million at the solutions. However, the objective function had stopped changing at this solution, and therefore the optimizer was able to finish. 28 of our constraints were active, and the remaining 20 were inactive. The final solution was 162.8 seconds.
+
+\subsection{Basic constrained optimizer: Quadratic Penalty Method}
+I attempted to use the quadratic penalty method to solve this problem. I wrote a program that added a penalty to my original objective at each constraint, as shown in \cref{eq:qp}. I experimented with the penalty value and decided to use $\rho = 100$ as an initial starting point. I then used fminunc with the modified objective. This solved really quickly, using only 945 function calls and converging with a firstorderopt of $6.6 x 10^{-7}$. The various iteration metrics are summarized in \cref{tab:results}. 
+
+\begin{equation}
+    \pi (x,\rho) = f(x) + \frac{\rho}{2} \sum_{i=1}^{m} (max[0, -c_i(x)])^2
+    \label{eq:qp}
+\end{equation}
+
+
+\begin{table}[htbp]
+\caption{Iteration History Information}
+\label{tab:results}
+\begin{center}
+\begin{tabular}{|| c || c || c ||}
+\hline \hline
+ & Fmincon & Quadratic Penalty\\
+\hline
+Iterations & 615 & 2\\
+\hline
+Function Calls & 39,326 & 945\\
+\hline
+f(x) & 162.8053 & 285.23\\
+\hline
+firstorderopt & $1.26 x 10^8$ & $6.61 x 10^{-7}$\\
+
+\hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+As shown in \cref{tab:results}, the accuracy was very far off. In fact, the resultant path is almost exactly the same as the original input path. For some reason, fminunc was unable to minimize the function, despite converging according to First-Order optimality. I suspect this is due to a problem with the gradient of our function; our objective function is highly complex and possibly discontinuous, despite our many efforts to make it continuous. I also had problems with $\rho$. For some reason, if I increased $\rho$ each iteration, the solution went crazy. Keeping it at one large value seemed effective. The quadratic penalty did converge much more quickly than fmincon. However, this is fairly meaningless since the results are so far off. A more complex method than quadratic penalty is likely needed to solve this problem.
+
+\subsection{Looking forward}
+We learned a lot from this homework assignment. I modeled a discontinuous model using a two dimensional sine wave. I tried different methods of representing the points, including angles, to keep the points equidistant from one another and prevent clumping. While the angle method worked some of the time, it was incredibly sensitive to the input condition and failed often. As we continue to work on the project, one option is to find a similar method to make the solution cleaner.
+
+In the future, we hope to adjust our model dramatically. While fmincon was able to solve our model, it did so with great difficulty. We determined that we need to focus on a different aspect of public transportation for our project, whether it be a discontinuous grid model, as we have already modeled, or another area entirely. For example, during the homework we experimented with optimizing the capacity of a public transportation system by varying the number of buses, commuter trains, and trams or light rails. The main constraint is cost, once again based on the number of each transportation method. We were also able to successfully solve this problem using fmincon.
+
+
+\end{document}

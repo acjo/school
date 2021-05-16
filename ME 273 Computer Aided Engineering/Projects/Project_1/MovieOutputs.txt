@@ -1,0 +1,6 @@
+Movie ID           Computed Trajectory Component
+Avengers1                  201.613
+PolarExpr                  235.294
+Avengers2                  221.667
+BatManBeg                  23.3333
+SpiderMan                  191.176
