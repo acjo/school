@@ -1,0 +1,266 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10577,        256]
+NotebookOptionsPosition[      9465,        233]
+NotebookOutlinePosition[      9808,        248]
+CellTagsIndexPosition[      9765,        245]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Finding", " ", "Bifurcation", " ", "Points"}], "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "4"}], "x"}], "+", "y", "+", 
+        SuperscriptBox["x", "2"]}], "\[Equal]", "0"}], " ", "&&", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"1.5", "a"}], "-", "y"}], "\[Equal]", "0"}]}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "y"}], "}"}], ",", " ", "Reals"}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Animate", "[", 
+    RowBox[{
+     RowBox[{"StreamPlot", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "4"}], "x"}], "+", "y", "+", 
+          RowBox[{"x", "^", "2"}]}], ",", " ", 
+         RowBox[{
+          RowBox[{"1.5", "a"}], "-", "y"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"-", "5"}], ",", "5"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", 
+         RowBox[{"-", "5"}], ",", "5"}], "}"}], ",", 
+       RowBox[{"Axes", " ", "\[Rule]", " ", "True"}]}], "]"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "0", ",", "3"}], "}"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.794530489074592*^9, 3.7945304978322353`*^9}, {
+  3.794530872241168*^9, 3.794530965395187*^9}, {3.7945310422585945`*^9, 
+  3.7945311295765753`*^9}, {3.7945314087305503`*^9, 3.7945314156045084`*^9}},
+ CellLabel->"In[34]:=",ExpressionUUID->"39ec3813-a940-458d-8600-5ed9a38e0aaf"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Solve","ratnz",
+   "\"Solve was unable to solve the system with inexact coefficients. The \
+answer was obtained by solving a corresponding exact system and numericizing \
+the result.\"",2,34,9,17617891698600056203,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{
+  3.7945309739327116`*^9, {3.794531118501096*^9, 3.794531130217086*^9}, 
+   3.794531416881339*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"a8cc850b-cd82-419f-868d-5cf052c40714"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"x", "\[Rule]", 
+      RowBox[{"ConditionalExpression", "[", 
+       RowBox[{
+        RowBox[{"2.`", "\[VeryThinSpace]", "-", 
+         RowBox[{"0.7071067811865475`", " ", 
+          SqrtBox[
+           RowBox[{"8.`", "\[VeryThinSpace]", "-", 
+            RowBox[{"3.`", " ", "a"}]}]]}]}], ",", 
+        RowBox[{"a", "<", "2.6666666666666665`"}]}], "]"}]}], ",", 
+     RowBox[{"y", "\[Rule]", 
+      RowBox[{"ConditionalExpression", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"4.`", " ", 
+          RowBox[{"(", 
+           RowBox[{"2.`", "\[VeryThinSpace]", "-", 
+            RowBox[{"0.7071067811865475`", " ", 
+             SqrtBox[
+              RowBox[{"8.`", "\[VeryThinSpace]", "-", 
+               RowBox[{"3.`", " ", "a"}]}]]}]}], ")"}]}], "-", 
+         RowBox[{"1.`", " ", 
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{"2.`", "\[VeryThinSpace]", "-", 
+             RowBox[{"0.7071067811865475`", " ", 
+              SqrtBox[
+               RowBox[{"8.`", "\[VeryThinSpace]", "-", 
+                RowBox[{"3.`", " ", "a"}]}]]}]}], ")"}], "2"]}]}], ",", 
+        RowBox[{"a", "<", "2.6666666666666665`"}]}], "]"}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"x", "\[Rule]", 
+      RowBox[{"ConditionalExpression", "[", 
+       RowBox[{
+        RowBox[{"2.`", "\[VeryThinSpace]", "+", 
+         RowBox[{"0.7071067811865475`", " ", 
+          SqrtBox[
+           RowBox[{"8.`", "\[VeryThinSpace]", "-", 
+            RowBox[{"3.`", " ", "a"}]}]]}]}], ",", 
+        RowBox[{"a", "<", "2.6666666666666665`"}]}], "]"}]}], ",", 
+     RowBox[{"y", "\[Rule]", 
+      RowBox[{"ConditionalExpression", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"4.`", " ", 
+          RowBox[{"(", 
+           RowBox[{"2.`", "\[VeryThinSpace]", "+", 
+            RowBox[{"0.7071067811865475`", " ", 
+             SqrtBox[
+              RowBox[{"8.`", "\[VeryThinSpace]", "-", 
+               RowBox[{"3.`", " ", "a"}]}]]}]}], ")"}]}], "-", 
+         RowBox[{"1.`", " ", 
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{"2.`", "\[VeryThinSpace]", "+", 
+             RowBox[{"0.7071067811865475`", " ", 
+              SqrtBox[
+               RowBox[{"8.`", "\[VeryThinSpace]", "-", 
+                RowBox[{"3.`", " ", "a"}]}]]}]}], ")"}], "2"]}]}], ",", 
+        RowBox[{"a", "<", "2.6666666666666665`"}]}], "]"}]}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.7945309739483366`*^9, {3.7945311185325747`*^9, 3.7945311303263984`*^9}, 
+   3.7945314169282045`*^9},
+ CellLabel->"Out[34]=",ExpressionUUID->"34185e3f-97e5-4295-a6a0-0ff49ddd646a"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 2.6935104968949766`, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`a$$], 0, 3}}, Typeset`size$$ = {360., {178., 183.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`a$151215$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`a$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$151215$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      StreamPlot[{(-4) $CellContext`x + $CellContext`y + $CellContext`x^2, 
+         1.5 $CellContext`a$$ - $CellContext`y}, {$CellContext`x, -5, 
+         5}, {$CellContext`y, -5, 5}, Axes -> True], 
+      "Specifications" :> {{$CellContext`a$$, 0, 3, 
+         AppearanceElements -> {
+          "ProgressSlider", "PlayPauseButton", "FasterSlowerButtons", 
+           "DirectionButton"}}}, 
+      "Options" :> {
+       ControlType -> Animator, AppearanceElements -> None, DefaultBaseStyle -> 
+        "Animate", DefaultLabelStyle -> "AnimateLabel", SynchronousUpdating -> 
+        True, ShrinkingDelay -> 10.}, "DefaultOptions" :> {}],
+     ImageSizeCache->{411., {217., 223.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Animate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.7945309739483366`*^9, {3.7945311185325747`*^9, 3.7945311303263984`*^9}, 
+   3.7945314169907227`*^9},
+ CellLabel->"Out[35]=",ExpressionUUID->"9da89ea1-1ca9-4e83-aa5b-3053314f10e0"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7945308698517103`*^9, 3.794530876092108*^9}},
+ CellLabel->"In[25]:=",ExpressionUUID->"9194898f-bbeb-49e6-94db-01440a156da8"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.794523555788519*^9, 3.7945235865751724`*^9}, {
+   3.794523624648156*^9, 3.794523629180924*^9}, {3.7945246595881634`*^9, 
+   3.794524671419365*^9}, {3.794528084596449*^9, 3.794528141418024*^9}, {
+   3.7945282903213034`*^9, 3.794528297241788*^9}, {3.794528919206415*^9, 
+   3.7945289453874393`*^9}, {3.7945290832374015`*^9, 3.794529089627122*^9}, {
+   3.794530068990193*^9, 3.794530090108488*^9}, {3.794530130152418*^9, 
+   3.7945301396976075`*^9}, {3.7945301779570017`*^9, 3.794530181784226*^9}, {
+   3.7945304846381745`*^9, 3.794530484810579*^9}, {3.7945305156015034`*^9, 
+   3.794530632841874*^9}, {3.7945307050841093`*^9, 3.7945307076296496`*^9}, 
+   3.7945308827189083`*^9},
+ CellLabel->"In[26]:=",ExpressionUUID->"df2324df-531d-4541-94cb-cd11e0b0ab0d"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.794530879044348*^9, 3.7945308790908365`*^9}},
+ CellLabel->"In[27]:=",ExpressionUUID->"bbd3bb51-ea3f-434e-83f1-f6509a838e60"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7945236882085223`*^9, 3.7945237059606085`*^9}, {
+   3.794523849337427*^9, 3.794523858944047*^9}, {3.7945240274581833`*^9, 
+   3.7945240448813443`*^9}, {3.7945242581274257`*^9, 3.794524277583045*^9}, 
+   3.7945289564504933`*^9},
+ CellLabel->"In[28]:=",ExpressionUUID->"8451d7a8-1417-443d-a118-756a0b5e1270"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7945289531400247`*^9, 3.7945289531615458`*^9}},
+ CellLabel->"In[29]:=",ExpressionUUID->"60424f42-8a2d-409e-81ab-717d8124b2de"]
+},
+WindowSize->{1280, 637},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1644, 44, 110, "Input",ExpressionUUID->"39ec3813-a940-458d-8600-5ed9a38e0aaf"],
+Cell[2227, 68, 520, 12, 21, "Message",ExpressionUUID->"a8cc850b-cd82-419f-868d-5cf052c40714"],
+Cell[2750, 82, 2708, 69, 64, "Output",ExpressionUUID->"34185e3f-97e5-4295-a6a0-0ff49ddd646a"],
+Cell[5461, 153, 2238, 44, 492, "Output",ExpressionUUID->"9da89ea1-1ca9-4e83-aa5b-3053314f10e0"]
+}, Open  ]],
+Cell[7714, 200, 173, 2, 28, InheritFromParent,ExpressionUUID->"9194898f-bbeb-49e6-94db-01440a156da8"],
+Cell[7890, 204, 859, 12, 67, "Input",ExpressionUUID->"df2324df-531d-4541-94cb-cd11e0b0ab0d"],
+Cell[8752, 218, 173, 2, 28, InheritFromParent,ExpressionUUID->"bbd3bb51-ea3f-434e-83f1-f6509a838e60"],
+Cell[8928, 222, 355, 5, 28, "Input",ExpressionUUID->"8451d7a8-1417-443d-a118-756a0b5e1270"],
+Cell[9286, 229, 175, 2, 28, InheritFromParent,ExpressionUUID->"60424f42-8a2d-409e-81ab-717d8124b2de"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
