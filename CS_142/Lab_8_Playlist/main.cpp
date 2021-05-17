@@ -1,6 +1,7 @@
 #include "Playlist.h"
 
-void Menu() {
+void Menu()
+{
 	cout << "add \t Adds a list of songs to the library" << endl;
 	cout << "list \t Lists all the songs in the library" << endl;
 	cout << "addp \t Adds a new playlist" << endl;
@@ -15,7 +16,8 @@ void Menu() {
 	return;
 }
 
-int main() {
+int main( int argc, char* argv[] )
+{
 	bool iterate = true;
 	string userChoice = "A";
 	vector<Song*> songPointers;
@@ -30,27 +32,32 @@ int main() {
 
 	cout << "Welcome to the Firstline Player! Enter options to see menu options." << endl;
 	cout << endl;
-	while (iterate == true) {
+	while (iterate == true)
+	{
 		cout << "Enter your selection now: " << endl;
 		cout << endl;
 		cin >> userChoice;
 		cin.ignore();
-		if (userChoice == "quit") {
+		if (userChoice == "quit")
+		{
 			iterate = false;
 		}
-		else if (userChoice == "options" || (userChoice != "add" && userChoice != "list" && userChoice != "addp" && userChoice != "addsp" && 
-				userChoice != "listp" && userChoice != "play" && userChoice != "remp" && userChoice != "remsp" && userChoice != "remsl")) {
+		else if (userChoice == "options" || (userChoice != "add" && userChoice != "list" && userChoice != "addp" && userChoice != "addsp" &&
+						     userChoice != "listp" && userChoice != "play" && userChoice != "remp" && userChoice != "remsp" && userChoice != "remsl"))
+		{
 			Menu();
 		}
-		else if (userChoice == "add") {
+		else if (userChoice == "add")
+		{
 			cout << "Read in Song names and first lines (type \"STOP\" when done):" << endl;
-			while (newSongName != "STOP") {
+			while (newSongName != "STOP")
+			{
 				cout << "Song Name:" << endl;
 				getline(cin, newSongName);
-				if (newSongName == "STOP") {
+				if (newSongName == "STOP")
 					continue;
-				}
-				else {
+				else
+				{
 					cout << "Song's first line: " << endl;
 					getline(cin, newSongFirstLine);
 					newSong = new Song(newSongName, newSongFirstLine);
@@ -59,46 +66,52 @@ int main() {
 			}
 			cout << endl;
 		}
-		else if (userChoice == "list") {
-			for (unsigned int i = 0; i < songPointers.size(); ++i) {
+		else if (userChoice == "list")
+		{
+			for (unsigned int i = 0; i < songPointers.size(); ++i)
+			{
 				cout << songPointers.at(i)->GetSongName() << ": \"" << songPointers.at(i)->GetSongFristLine();
 				cout << "\", " << songPointers.at(i)->GetAmountPlayed() << " play(s)." << endl;
 			}
 			cout << endl;
 		}
-		else if (userChoice == "addp") {
+		else if (userChoice == "addp")
+		{
 			cout << "Playlist name: " << endl;
 			getline(cin, newPlaylistName);
 			newPlaylist = new Playlist(newPlaylistName);
 			playlistPointers.push_back(newPlaylist);
 			cout << endl;
 		}
-		else if (userChoice == "listp") {
-			for (unsigned int i = 0; i < playlistPointers.size(); ++i) {
+		else if (userChoice == "listp")
+		{
+			for (unsigned int i = 0; i < playlistPointers.size(); ++i)
 				cout << i << ": " << playlistPointers.at(i)->GetPlaylistName() << endl;
-			}
+
 			cout << endl;
 		}
-		else if (userChoice == "addsp") {
-			for (unsigned int i = 0; i < playlistPointers.size(); ++i) {
+		else if (userChoice == "addsp")
+		{
+			for (unsigned int i = 0; i < playlistPointers.size(); ++i)
 				cout << i << ": " << playlistPointers.at(i)->GetPlaylistName() << endl;
-			}
+
 			cout << "Pick a playlist index number: " << endl;
 			cin >> playlistIndexNumber;
 			cin.ignore();
-			for (unsigned int i = 0; i < songPointers.size(); ++i) {
+			for (unsigned int i = 0; i < songPointers.size(); ++i)
 				cout << i << ": " << songPointers.at(i)->GetSongName() << endl;
-			}
+
 			cout << "Pick a song index number: " << endl;
 			cin >> songIndexNumber;
 			cin.ignore();
 			playlistPointers.at(playlistIndexNumber)->AddSongToPlaylist(songPointers.at(songIndexNumber));
 			cout << endl;
 		}
-		else if (userChoice == "play") {
-			for (unsigned int i = 0; i < playlistPointers.size(); ++i) {
+		else if (userChoice == "play")
+		{
+			for (unsigned int i = 0; i < playlistPointers.size(); ++i)
 				cout << i << ": " << playlistPointers.at(i)->GetPlaylistName() << endl;
-			}
+
 			cout << "Pick a playlist index number: " << endl;
 			cin >> playlistIndexNumber;
 			cin.ignore();
@@ -107,10 +120,11 @@ int main() {
 			playlistPointers.at(playlistIndexNumber)->PlaySongs();
 			cout << endl;
 		}
-		else if (userChoice == "remp") {
-			for (unsigned int i = 0; i < playlistPointers.size(); ++i) {
+		else if (userChoice == "remp")
+		{
+			for (unsigned int i = 0; i < playlistPointers.size(); ++i)
 				cout << i << ": " << playlistPointers.at(i)->GetPlaylistName() << endl;
-			}
+
 			cout << "Pick a playlist index number to remove: " << endl;
 			cin >> playlistIndexNumber;
 			cin.ignore();
@@ -118,10 +132,11 @@ int main() {
 			playlistPointers.erase(playlistPointers.begin() + playlistIndexNumber);
 			cout << endl;
 		}
-		else if (userChoice == "remsp") {
-			for (unsigned int i = 0; i < playlistPointers.size(); ++i) {
+		else if (userChoice == "remsp")
+		{
+			for (unsigned int i = 0; i < playlistPointers.size(); ++i)
 				cout << i << ": " << playlistPointers.at(i)->GetPlaylistName() << endl;
-			}
+
 			cout << "Pick a playlist index number: " << endl;
 			cin >> playlistIndexNumber;
 			cin.ignore();
@@ -132,18 +147,20 @@ int main() {
 			playlistPointers.at(playlistIndexNumber)->EraseSongFromPlaylist(songIndexNumber);
 			cout << endl;
 		}
-		else if (userChoice == "remsl") {
-			for (unsigned int i = 0; i < songPointers.size(); ++i) {
+		else if (userChoice == "remsl")
+		{
+			for (unsigned int i = 0; i < songPointers.size(); ++i)
 				cout << i << ": " << songPointers.at(i)->GetSongName() << endl;
-			}
 			cout << "Pick a song index number to remove: " << endl;
 			cin >> songIndexNumber;
 			cin.ignore();
-			for (unsigned int i = 0; i < playlistPointers.size(); ++i) {
+			for (unsigned int i = 0; i < playlistPointers.size(); ++i)
 				playlistPointers.at(i)->DeleteSongsInPlaylist(songPointers.at(songIndexNumber)->GetSongName());
-			}
-			for (unsigned int i = 0; i < songPointers.size(); ++i) {
-				if (songPointers.at(i)->GetSongName() == songPointers.at(songIndexNumber)->GetSongName()) {
+
+			for (unsigned int i = 0; i < songPointers.size(); ++i)
+			{
+				if (songPointers.at(i)->GetSongName() == songPointers.at(songIndexNumber)->GetSongName())
+				{
 					delete songPointers.at(i); // deleting the allocated memory as the song gets deleted from the library
 					songPointers.erase(songPointers.begin() + i);
 					break;
@@ -152,11 +169,13 @@ int main() {
 			cout << endl;
 		}
 	}
-	for (unsigned int i = 0; i < playlistPointers.size(); ++i) {
+	for (unsigned int i = 0; i < playlistPointers.size(); ++i)
+	{
 		delete playlistPointers.at(i);
 	}
-	for (unsigned int i = 0; i < songPointers.size(); ++i) {
-		delete songPointers.at(i); //freeing memeory after the user enters "quit" 
+	for (unsigned int i = 0; i < songPointers.size(); ++i)
+	{
+		delete songPointers.at(i); //freeing memeory after the user enters "quit"
 	}
 	playlistPointers.clear();
 	songPointers.clear();
