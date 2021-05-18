@@ -21,7 +21,8 @@ after iteration 2:
 
 using namespace std;
 
-int main() {
+int main()
+{
 
 	const double ALLOWED_DIFFERENCE = 0.1;
 	const int WIDTH = 9;
@@ -40,22 +41,22 @@ int main() {
 	double topBoundaryCondition = 100.0;
 	double sideBoundaryCondition = 0.0;
 
-	for (int row = 0; row < NUM_ROWS; ++row) {
-		for (int col = 0; col < NUM_COLS; ++col) {
+	for (int row = 0; row < NUM_ROWS; ++row)
+	{
+		for (int col = 0; col < NUM_COLS; ++col)
+		{
 			if (col > 0 && col < (NUM_COLS - 1) &&
-				(row == 0 || row == (NUM_ROWS - 1))) {
+			    (row == 0 || row == (NUM_ROWS - 1)))
 				steadyStateTemp[row][col] = topBoundaryCondition;
-			}
-			else {
+			else
 				steadyStateTemp[row][col] = sideBoundaryCondition;
-			}
 		}
 	}
 
-	for (int row = 0; row < NUM_ROWS; ++row) {
-		for (int col = 0; col < NUM_COLS; ++col) {
+	for (int row = 0; row < NUM_ROWS; ++row)
+	{
+		for (int col = 0; col < NUM_COLS; ++col)
 			tempArray[row][col] = steadyStateTemp[row][col];
-		}
 	}
 
 	cout << "Hotplate simulator" << endl;
@@ -63,91 +64,94 @@ int main() {
 	cout << "Printing initial plate..." << endl;
 	cout << fixed << setprecision(PRECISION);
 
-	for (int row = 0; row < NUM_ROWS; ++row) {
-		for (int col = 0; col < NUM_COLS; ++col) {
-			if (col < NUM_COLS - 1) {
+	for (int row = 0; row < NUM_ROWS; ++row)
+	{
+		for (int col = 0; col < NUM_COLS; ++col)
+		{
+			if (col < NUM_COLS - 1)
 				cout << setw(WIDTH) << steadyStateTemp[row][col] << ",";
-			}
-			else {
+			else
 				cout << setw(WIDTH) << steadyStateTemp[row][col] << endl;
-			}
 		}
 	}
 
-	for (int row = 0; row < NUM_ROWS; ++row) {
-		for (int col = 0; col < NUM_COLS; ++col) {
-			if (row == 0 || col == 0 || row == NUM_ROWS - 1 || col == NUM_COLS - 1) {
+	for (int row = 0; row < NUM_ROWS; ++row)
+	{
+		for (int col = 0; col < NUM_COLS; ++col)
+		{
+			if (row == 0 || col == 0 || row == NUM_ROWS - 1 || col == NUM_COLS - 1)
 				continue;
-			}
 
 			steadyStateTemp[row][col]
 				= (tempArray[row - 1][col]
-					+ tempArray[row + 1][col]
-					+ tempArray[row][col - 1]
-					+ tempArray[row][col + 1]) / 4;
-
+				   + tempArray[row + 1][col]
+				   + tempArray[row][col - 1]
+				   + tempArray[row][col + 1]) / 4;
 		}
 	}
 
 	cout << endl;
 	cout << "Printing plate after one iteration..." << endl;
 
-	for (int row = 0; row < NUM_ROWS; ++row) {
-		for (int col = 0; col < NUM_COLS; ++col) {
-			if (col < NUM_COLS - 1) {
+	for (int row = 0; row < NUM_ROWS; ++row)
+	{
+		for (int col = 0; col < NUM_COLS; ++col)
+		{
+			if (col < NUM_COLS - 1)
 				cout << setw(WIDTH) << steadyStateTemp[row][col] << ",";
-			}
-			else {
+			else
 				cout << setw(WIDTH) << steadyStateTemp[row][col] << endl;
-			}
 		}
 	}
 
-	for (int row = 0; row < NUM_ROWS; ++row) {
-		for (int col = 0; col < NUM_COLS; ++col) {
+	for (int row = 0; row < NUM_ROWS; ++row)
+	{
+		for (int col = 0; col < NUM_COLS; ++col)
 			tempArray[row][col] = steadyStateTemp[row][col];
-		}
 	}
 
-	while (iterate) {
+	while (iterate)
+	{
 
-		for (int row = 0; row < NUM_ROWS; ++row) {
-			for (int col = 0; col < NUM_COLS; ++col) {
-				if (row == 0 || col == 0 || row == NUM_ROWS - 1 || col == NUM_COLS - 1) {
+		for (int row = 0; row < NUM_ROWS; ++row)
+		{
+			for (int col = 0; col < NUM_COLS; ++col)
+			{
+				if (row == 0 || col == 0 || row == NUM_ROWS - 1 || col == NUM_COLS - 1)
 					continue;
-				}
 
 				steadyStateTemp[row][col]
 					= (tempArray[row - 1][col]
-						+ tempArray[row + 1][col]
-						+ tempArray[row][col - 1]
-						+ tempArray[row][col + 1]) / 4;
+					   + tempArray[row + 1][col]
+					   + tempArray[row][col - 1]
+					   + tempArray[row][col + 1]) / 4;
 			}
 		}
 
-		for (int row = 0; row < NUM_ROWS; ++row) {
-			for (int col = 0; col < NUM_COLS; ++col) {
+		for (int row = 0; row < NUM_ROWS; ++row)
+		{
+			for (int col = 0; col < NUM_COLS; ++col)
 				differenceArray[row][col] = (steadyStateTemp[row][col] - tempArray[row][col]);
-			}
 		}
 
 		maxDifference = differenceArray[0][0];
-		for (int row = 0; row < NUM_ROWS; ++row) {
-			for (int col = 0; col < NUM_COLS; ++col) {
-				if (maxDifference < differenceArray[row][col]) {
+		for (int row = 0; row < NUM_ROWS; ++row)
+		{
+			for (int col = 0; col < NUM_COLS; ++col)
+			{
+				if (maxDifference < differenceArray[row][col])
 					maxDifference = differenceArray[row][col];
-				}
 			}
 		}
 
-		if (maxDifference < ALLOWED_DIFFERENCE) {
+		if (maxDifference < ALLOWED_DIFFERENCE)
 			iterate = false;
-		}
-		else {
-			for (int row = 0; row < NUM_ROWS; ++row) {
-				for (int col = 0; col < NUM_COLS; ++col) {
+		else
+		{
+			for (int row = 0; row < NUM_ROWS; ++row)
+			{
+				for (int col = 0; col < NUM_COLS; ++col)
 					tempArray[row][col] = steadyStateTemp[row][col];
-				}
 			}
 		}
 	}
@@ -155,14 +159,14 @@ int main() {
 	cout << endl;
 	cout << "Printing final plate..." << endl;
 
-	for (int row = 0; row < NUM_ROWS; ++row) {
-		for (int col = 0; col < NUM_COLS; ++col) {
-			if (col < NUM_COLS - 1) {
+	for (int row = 0; row < NUM_ROWS; ++row)
+	{
+		for (int col = 0; col < NUM_COLS; ++col)
+		{
+			if (col < NUM_COLS - 1)
 				cout << setw(WIDTH) << steadyStateTemp[row][col] << ",";
-			}
-			else {
+			else
 				cout << setw(WIDTH) << steadyStateTemp[row][col] << endl;
-			}
 		}
 	}
 
@@ -170,65 +174,70 @@ int main() {
 	cout << "Outputting final plate to file \"Hotplate.csv\"..." << endl;
 
 	outputFile.open("Hotplate.csv");
-	if (!outputFile.is_open()) {
+	if (!outputFile.is_open())
+	{
 		cout << "Could not open file myoutfile.txt." << endl;
 		return 1;
 	}
 
 	outputFile << fixed << setprecision(PRECISION);
-	for (int row = 0; row < NUM_ROWS; ++row) {
-		for (int col = 0; col < NUM_COLS; ++col) {
-			if (col < NUM_COLS - 1) {
+	for (int row = 0; row < NUM_ROWS; ++row)
+	{
+		for (int col = 0; col < NUM_COLS; ++col)
+		{
+			if (col < NUM_COLS - 1)
 				outputFile << setw(WIDTH) << steadyStateTemp[row][col] << ",";
-			}
-			else {
+			else
 				outputFile << setw(WIDTH) << steadyStateTemp[row][col] << endl;
-			}
 		}
 	}
 	outputFile.close();
 
 	inputFile.open("Inputplate.txt");
-	if (!inputFile.is_open()) {
+	if (!inputFile.is_open())
+	{
 		cout << "Could not open file Inputplate.txt." << endl;
 		return 1;
 	}
 
-	for (int row = 0; row < NUM_ROWS; ++row) {
-		for (int col = 0; col < NUM_COLS; ++col) {
+	for (int row = 0; row < NUM_ROWS; ++row)
+	{
+		for (int col = 0; col < NUM_COLS; ++col)
 			inputFile >> steadyStateTemp[row][col];
-		}
 	}
 
 	inputFile.close();
 
-	for (int row = 0; row < NUM_ROWS; ++row) {
-		for (int col = 0; col < NUM_COLS; ++col) {
+	for (int row = 0; row < NUM_ROWS; ++row)
+	{
+		for (int col = 0; col < NUM_COLS; ++col)
 			tempArray[row][col] = steadyStateTemp[row][col];
-		}
 	}
 
-	for (i = 0; i < inputIterations; ++i) {
+	for (i = 0; i < inputIterations; ++i)
+	{
 
-		for (int row = 0; row < NUM_ROWS; ++row) {
-			for (int col = 0; col < NUM_COLS; ++col) {
-				if (row == 0 || col == 0 || row == NUM_ROWS - 1 || col == NUM_COLS - 1) {
+		for (int row = 0; row < NUM_ROWS; ++row)
+		{
+			for (int col = 0; col < NUM_COLS; ++col)
+			{
+				if (row == 0 || col == 0 || row == NUM_ROWS - 1 || col == NUM_COLS - 1)
 					continue;
-				}
 
 				steadyStateTemp[row][col]
 					= (tempArray[row - 1][col]
-						+ tempArray[row + 1][col]
-						+ tempArray[row][col - 1]
-						+ tempArray[row][col + 1]) / 4;
+					   + tempArray[row + 1][col]
+					   + tempArray[row][col - 1]
+					   + tempArray[row][col + 1]) / 4;
 			}
 		}
 
-		if (i < (inputIterations - 1)) {
-			for (int row = 0; row < NUM_ROWS; ++row) {
-				for (int col = 0; col < NUM_COLS; ++col) {
+		if (i < (inputIterations - 1))
+		{
+			for (int row = 0; row < NUM_ROWS; ++row)
+			{
+				for (int col = 0; col < NUM_COLS; ++col)
 					tempArray[row][col] = steadyStateTemp[row][col];
-				}
 			}
 		}
 	}
@@ -236,14 +245,14 @@ int main() {
 	cout << endl;
 	cout << "Printing input plate after 3 updates..." << endl;
 
-	for (int row = 0; row < NUM_ROWS; ++row) {
-		for (int col = 0; col < NUM_COLS; ++col) {
-			if (col < NUM_COLS - 1) {
+	for (int row = 0; row < NUM_ROWS; ++row)
+	{
+		for (int col = 0; col < NUM_COLS; ++col)
+		{
+			if (col < NUM_COLS - 1)
 				cout << setw(WIDTH) << steadyStateTemp[row][col] << ",";
-			}
-			else {
+			else
 				cout << setw(WIDTH) << steadyStateTemp[row][col] << endl;
-			}
 		}
 	}
 
